@@ -1,0 +1,76 @@
+var fs = require('fs'),
+    xml2js = require('xml2js'),
+    cons = require('console'),
+    util = require('util'),
+    exts = [ "xml" ];
+function fixup_data( input ) {
+  var data, nbn, nbbn, temp, matches, rets, key, k, temp2, temp3;
+
+  for( key in Object.keys(input) ) {
+    if( Array.isArray(input[key]) ) {
+      if( input[key].length == 1 ) {
+        input[key] = input[key][0];
+      }
+    } else {
+      temp = input[key];
+
+      if( typeof temp == 'object' ) {
+        cons.log( temp );
+        cons.log( typeof temp );
+        if( Object.keys(temp).length > 1 && Object(temp).indexOf('$') != -1 ) {
+          nbn = temp['$']['name'];
+          data = {};
+          for( k in Object.keys(temp) ) {
+            if( k != '$' ) {
+              temp2 = temp[k];
+              if( Array.isArray(temp2) && temp2.length == 1 ) temp2 = temp2[0];
+              if( typeof temp2 == 'object' ) temp2 = fixup_data(temp2);
+              temp3 = {};
+              temp3[k] = temp2;
+              data[nbn] = temp3;
+            }
+          }
+        }
+      } else {
+        input[key] = fixup_data(temp);
+      }
+    }
+  }
+}
+
+function loadFile( file ) {
+    if( !file ) {
+	throw new Error("loadFile called without a file to load");
+    }
+
+    var fdata;
+    var xmldata;
+    var parser = new xml2js.Parser();
+
+    try {
+	fdata = fs.readFileSync( file, 'utf-8' );
+	parser.parseString( fdata, function( err, result ) {
+	    if(err) {
+		throw(err);
+            }
+	    xmldata = result;
+	});
+
+      if( xmldata == {} ) {
+        throw new Error("not an xml file");
+      }
+
+      if( Object.keys(xmldata).length == 1 ) {
+        var t = Object.keys(xmldata)[0];
+        xmldata = fixup_data(xmldata[t]);
+        process.exit();
+      }
+    } catch( e ) {
+	throw e;
+    }
+
+    return xmldata;
+}
+
+module.exports.loadFile = loadFile;
+module.exports.extensions = function() { return exts; };

@@ -1,0 +1,39 @@
+class API:
+  extensions()  - return an array of valid extensions the class handles
+  load(<file>)  - attempt to load the file as the type handled by the class
+  requires_any_of - specifies any dependencies of the class
+
+top-level API:
+  load_files( <hash for args> ) - attempt to load a list of config files
+       - { files : [ <filenames> ] }
+       - { files : [ <filenames> ], filter : function(data){} }
+       - { files : [ <filenames> ], use_ext : true }
+       - { files : [ <filenames> ], flatten_to_hash : true }
+       - { files : [ <filenames> ], driver_args: { General : { LowerCaseNames : true } } }
+       - 'filter' is a callback that can filter the data being returned
+         and is passed the data object (Javascript doesn't actually have
+         associative arrays) that was loaded - this should be "modified in
+         place" to remain true to the Perl version, but it might be more
+         in line with Javascript to return the modified version.
+       - 'use_ext' will attempt to match the filename extensions against
+         the supported list and only load those matched for the loading
+         plugin. (ie: a YAML file named myapp.cfg will not be offered to
+         the YAML loader)
+       - 'flatten_to_hash' will return a hash-like object keyed on the
+         filenames
+       - 'driver_args' can be used to pass arguments to the various file
+         loaders
+
+  load_stems( <ditto> ) - provided list of strings are "filename stems" to
+                          be combined with the list of supported extensions
+                          to produce a filename for loading
+       - { stems : [ <stems> ] }
+       - { stems : [ <stems> ], filter: function(data) {} }
+       - { stems : [ <stems> ], use_ext : true }
+       - { stems : [ <stems> ], flatten_to_hash: true }
+       - 'filter', 'use_ext' and 'flatten_to_hash' work here the same as they
+         do for load_files()
+  finder() - in Perl version, not needed here
+  plugins() - ditto
+  extensions() - return the list of supported extensions
+

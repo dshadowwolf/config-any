@@ -1,0 +1,24 @@
+var tap = require("tap"),
+    test = tap.test,
+    plan = tap.plan,
+    config;
+
+
+test("load config", function (t) {
+   config = require("../lib/config")
+   t.ok(config, "object loaded")
+   t.ok(config.ini, "has INI interface")
+   t.type(config.ini, "function", "INI interface is the right type")
+   t.ok(config.config, "has Generic Config interface")
+   t.type(config.config, "function", "Generic Config interface is the right type")
+   t.ok(config.yaml, "has YAML interface")
+   t.type(config.yaml, "function", "YAML interface is the right type")
+   t.ok(config.json, "has JSON interface")
+   t.type(config.json, "function", "JSON interface is the right type")
+   t.ok(config.xml, "has XML interface")
+   t.type(config.xml, "function", "XML interface is the right type")
+   t.ok(config.jsol, "has Javascript Object Literal interface")
+   t.type(config.jsol, "function", "JSOL interface is the right type")
+   t.end()
+})
+

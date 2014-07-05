@@ -1,0 +1,9 @@
+{
+  name: 'TestApp',
+  Component: {
+    name: 'Controller::Foo'
+  },
+  Model: {
+    quux: xyzzy
+  }
+}
