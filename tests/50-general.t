@@ -13,11 +13,13 @@ test("Test Config::General loader/parser", function(t) {
     t.ok( conf )
     t.is( conf['name'], 'TestApp' )
     t.ok( conf['Component'] != undefined )
+    t.end()
 });
 
 test("Test LowerCaseNames option", function(t) {
     var conf = config.general.loadFile( 'tests/conf/conf/conf.conf', { LowerCaseNames: true } );
     t.ok( conf['component'] != undefined )
+    t.end()
 });
 /*
  * there are a number of features of Config::General that would be extremely difficult to port over
@@ -28,9 +30,11 @@ test("Test LowerCaseNames option", function(t) {
 test("Test extended data types", function(t) {
     var conf = config.general.loadFile( 'tests/conf/conf/single_element_arrayref.conf' );
     t.isDeeply( conf['foo'], ['bar'], "single element array" )
+    t.end()
 });
 */
 
 test("Test invalid config", function(t) {
     t.throws( function() { config.general.loadFile('tests/invalid/conf.conf'); } )
+    t.end()
 });
