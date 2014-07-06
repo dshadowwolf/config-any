@@ -18,10 +18,14 @@ test("Check to make sure proper errors are returned", function(t) {
 });
 
 test("Test various loading scenarios", function(t) {
-    t.ok( config.load_files( { files: testfiles, use_ext: false } ), "use_ext false works" )
-    t.ok( config.load_files( { files: testfiles, use_ext: true } ), "use_ext true works" )
-    t.ok( config.load_files( { files: testfiles, use_ext: true, filter: filt } ), "filter works" )
+    var c1 = config.load_files( { files: testfiles, use_ext: false } );
+    t.ok( c1 != undefined, "use_ext false works" )
+    var c2 = config.load_files( { files: testfiles, use_ext: true } );
+    t.ok( c2 != undefined, "use_ext true works" )
+    var c3 = config.load_files( { files: testfiles, use_ext: true, filter: filt } );
+    t.ok( c3 != undefined, "filter works" )
     t.throws( function(){config.load_files( { files: testfiles, use_ext: true, filter: function(data) { throw new Error("test"); } } ) }, undefined, "filter breaks" )
-    t.ok( config.load_stems( { stems: astems, use_ext: true } ), "load_stems with stems works" );
+    var c4 = config.load_stems( { stems: astems, use_ext: true } );
+    t.ok( c4 != undefined, "load_stems with stems works" );
     t.end()
 });
