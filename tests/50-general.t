@@ -31,6 +31,8 @@ test("Test LowerCaseNames option", function(t) {
  */
 test("Test extended data types", function(t) {
     var conf = config.general.loadFile( 'tests/conf/conf/single_element_arrayref.conf' );
+    console.log(util.inspect(conf));
+    console.log( conf['foo'] == ['bar'] ? true : false );
     t.plan(1)
     t.isDeeply( conf['foo'], ['bar'], "single element array" )
     t.end()

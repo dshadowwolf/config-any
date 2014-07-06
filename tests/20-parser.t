@@ -2,6 +2,7 @@ var tap = require("tap"),
     test = tap.test,
     plan = tap.plan,
     glob = require("glob"),
+    util = require('util'),
     config = require('../lib/config');
 
 var ext_list = [ 'conf', 'ini', 'jsol', 'json', 'xml', 'yml' ];
