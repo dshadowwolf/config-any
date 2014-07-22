@@ -5,7 +5,7 @@ var tap = require("tap"),
 
 
 test("load config", function (t) {
-   t.plan(18)
+   t.plan(20)
    t.doesNotThrow( function() { config = require("../lib/config"); } )
    t.ok(config, "object loaded")
    t.ok(config.ini, "has INI interface")
@@ -18,6 +18,8 @@ test("load config", function (t) {
    t.type(config.json, "function", "JSON interface is the right type")
    t.ok(config.xml, "has XML interface")
    t.type(config.xml, "function", "XML interface is the right type")
+   t.ok(config.perl, "has .pl config interface")
+   t.type(config.perl, "function", ".pl interface is the right type")
    t.ok(config.load_files, "has load_files()")
    t.ok(config.load_stems, "has load_stems()")
    t.ok(config.extensions, "has extensions()")
@@ -26,4 +28,3 @@ test("load config", function (t) {
    t.type(config.extensions, "function")
    t.end()
 })
-
