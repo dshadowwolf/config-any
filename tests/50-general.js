@@ -8,7 +8,7 @@ var console = require('console'),
 plan(4);
 
 test("Test Config::General loader/parser", function(t) {
-    var conf = config.general.loadFile( 'tests/conf/conf/conf.conf' );
+    var conf = config.general( 'conf/conf/conf.conf' );
     t.plan(3)
     t.isNot( conf, undefined, "file loaded" )
     t.is( conf['name'], 'TestApp', "name field defined" )
@@ -17,9 +17,9 @@ test("Test Config::General loader/parser", function(t) {
 });
 
 test("Test LowerCaseNames option", function(t) {
-    var conf2 = config.general.loadFile( 'tests/conf/conf/conf.conf', { LowerCaseNames: true } );
+    var conf2 = config.general( 'conf/conf/conf.conf', { LowerCaseNames: true } );
     t.plan(1)
-    t.isNot( conf2['component'], undefined, "Component block defined but lower-case" )
+    t.isNot( conf2.component, undefined, "Component block defined but lower-case" )
     t.end()
 });
 
@@ -30,7 +30,8 @@ test("Test LowerCaseNames option", function(t) {
  * these features will have to wait.
  */
 test("Test extended data types", function(t) {
-    var conf = config.general.loadFile( 'tests/conf/conf/single_element_arrayref.conf' );
+    var conf = config.general(
+'conf/conf/single_element_arrayref.conf', { ForceArray: true } );
     t.plan(1)
     t.isDeeply( conf['foo'], ['bar'], "single element array" )
     t.end()
@@ -39,6 +40,6 @@ test("Test extended data types", function(t) {
 
 test("Test invalid config", function(t) {
     t.plan(1)
-    t.throws( function() { config.general.loadFile('tests/invalid/conf.conf'); }, undefined, "invalid file causes an exception" )
+    t.throws( function() { config.general('invalid/conf.conf'); }, undefined, "invalid file causes an exception" )
     t.end()
 });

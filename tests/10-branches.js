@@ -9,7 +9,10 @@ var testfiles = glob.sync("tests/conf/test.*");
 var astems = testfiles.map(function(d) { d.match(/(.*)\.(?:\w+)$/)[1] }).filter( function(e,p,s) { return s.indexOf(e) == p; });
 function filt(data) {}
 
+plan(2)
+
 test("Check to make sure proper errors are returned", function(t) {
+    t.plan(4)
     t.throws( function() {config.load_files()}, { name: 'Error', message: "No files specified!" }, "load_files expects args")
     t.throws( function() {config.load_files({})}, { name: 'Error', message: "No files specified!" }, "load_files expects files")
     t.throws( function() {config.load_stems()}, { name: 'Error', message: "No files specified!" }, "load_stems expects args")
@@ -18,6 +21,7 @@ test("Check to make sure proper errors are returned", function(t) {
 });
 
 test("Test various loading scenarios", function(t) {
+    t.plan(5)
     var c1 = config.load_files( { files: testfiles, use_ext: false } );
     t.ok( c1 != undefined, "use_ext false works" )
     var c2 = config.load_files( { files: testfiles, use_ext: true } );
