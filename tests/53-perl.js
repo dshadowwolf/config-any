@@ -5,7 +5,7 @@ var console = require('console'),
     plan = tap.plan,
     config = require('../lib/config');
 
-var file   = 'conf/conf/conf.pl';
+var file   = 'conf/conf.pl';
 var conf = config.perl( file );
 
 test("test perl-format parse", function(t) {

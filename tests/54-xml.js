@@ -8,7 +8,7 @@ var tap = require("tap"),
 plan(3);
 
 test("basic parsing and loading", function(t) {
-    var conf = config.xml('conf/conf/conf.xml');
+    var conf = config.xml('conf/conf.xml');
     t.plan(2)
     t.ok( conf != undefined, "loaded file" )
     t.is( conf['name'], 'TestApp', "top-level lookup works" )
@@ -22,10 +22,9 @@ test("test trying to load invalid xml", function(t) {
 });
 
 test("check loading multiple tags of the same type as an array", function(t) {
-    var conf = config.xml('conf/conf/conf_arrayref.xml');
+    var conf = config.xml('conf/conf_arrayref.xml');
     t.plan(2)
     t.ok( conf != undefined, "loaded fine" )
     t.ok( Array.isArray(conf['elements']), "multiple <elements> tags loaded as an array" )
     t.end()
 });
-

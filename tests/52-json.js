@@ -9,7 +9,7 @@ plan(2);
 
 test( "test basic load and parse", function(t) {
     t.plan(2)
-    var conf = config.json("conf/conf/conf.json");
+    var conf = config.json("conf/conf.json");
     t.ok( conf != undefined, "loaded config" )
     t.is( conf['name'], 'TestApp', 'top-level lookup works' )
     t.end()

@@ -7,17 +7,9 @@ var console = require('console'),
 
 plan(5);
 
-
-/****************************************
-WRITE CUSTOM INI PARSER BECAUSE THE ONE WE ARE USING SUCKS BALLS
-****************************************/
-
-
-
-
 test("test system load/parse and contents for one possible format", function(t) {
     var cini = config.ini;
-    var conf = cini('conf/conf/conf.ini');
+    var conf = cini('conf/conf.ini');
     t.plan(3)
     t.isNot(conf,undefined,'config loaded')
     t.is(conf['name'], 'TestApp', "toplevel key lookup succeeded" )
@@ -27,7 +19,7 @@ test("test system load/parse and contents for one possible format", function(t) 
 
 test("test system load/parse and contents for another possible format", function(t) {
     var cini2 = config.ini;
-    var conf2 = cini2('conf/conf/conf2.ini');
+    var conf2 = cini2('conf/conf2.ini');
     t.plan(3)
     t.isNot(conf2,undefined,'config loaded')
     t.is(conf2['name'], 'TestApp', "toplevel key lookup succeeded" )
@@ -37,7 +29,7 @@ test("test system load/parse and contents for another possible format", function
 
 test("test no-map-space mode", function(t) {
     var cini3 = config.ini;
-    var conf3 = cini3('conf/conf/conf.ini', { 'MAP_TO_KEY':false} );
+    var conf3 = cini3('conf/conf.ini', { 'MAP_TO_KEY':false} );
     t.plan(3)
     t.isNot(conf3,undefined,'config loaded (no-space mode)')
     t.is(conf3['name'], 'TestApp', "toplevel key lookup succeeded" )
@@ -47,7 +39,7 @@ test("test no-map-space mode", function(t) {
 
 test("test subsections", function(t) {
     var cini4 = config.ini;
-    var conf4 = cini4('conf/conf/subsections.ini');
+    var conf4 = cini4('conf/subsections.ini');
     var want = { section1: { a: 1 , subsection1: { b: 2 }, subsection2: { c: 3 }}};
     t.plan(2)
     t.isNot(conf4,undefined,"config loaded")
@@ -60,5 +52,3 @@ test("test invalid config", function(t) {
     t.throws( function() { config.ini('invalid/conf.ini') }, undefined,"error thrown" );
     t.end()
 });
-
-    

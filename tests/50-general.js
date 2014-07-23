@@ -8,7 +8,7 @@ var console = require('console'),
 plan(4);
 
 test("Test Config::General loader/parser", function(t) {
-    var conf = config.general( 'conf/conf/conf.conf' );
+    var conf = config.general( 'conf/conf.conf' );
     t.plan(3)
     t.isNot( conf, undefined, "file loaded" )
     t.is( conf['name'], 'TestApp', "name field defined" )
@@ -17,7 +17,7 @@ test("Test Config::General loader/parser", function(t) {
 });
 
 test("Test LowerCaseNames option", function(t) {
-    var conf2 = config.general( 'conf/conf/conf.conf', { LowerCaseNames: true } );
+    var conf2 = config.general( 'conf/conf.conf', { LowerCaseNames: true } );
     t.plan(1)
     t.isNot( conf2.component, undefined, "Component block defined but lower-case" )
     t.end()
@@ -31,7 +31,7 @@ test("Test LowerCaseNames option", function(t) {
  */
 test("Test extended data types", function(t) {
     var conf = config.general(
-'conf/conf/single_element_arrayref.conf', { ForceArray: true } );
+'conf/single_element_arrayref.conf', { ForceArray: true } );
     t.plan(1)
     t.isDeeply( conf['foo'], ['bar'], "single element array" )
     t.end()
