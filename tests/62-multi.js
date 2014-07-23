@@ -16,7 +16,7 @@ var expect = [
 ];
 
 var results = config.yaml( file );
-console.log( util.inspect(results,false,100,true));
+
 test("test multi-stream YAML files", function(t) {
     t.plan(3);
     t.is( results.length, 2, '2 documents' );
