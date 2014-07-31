@@ -1,6 +1,6 @@
 {
     "name": "config-any",
-    "version": "0.1.1a",
+    "version": "0.1.1b",
     "description": "Straight port of Perl's Config::Any multi-configuration file parsing system",
     "main": "lib/config.js",
     "directories": {
