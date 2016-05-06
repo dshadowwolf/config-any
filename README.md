@@ -14,5 +14,5 @@ At the moment it knows every format that the base Perl module is
 potentially capable of handling before any plugins that are not part
 of the base distribution are added.
 
-See the documentation of Config::Any on CPAN (or via 'perldoc
-Config::Any') for more information.
+See the documentation of [Config::Any](https://metacpan.org/pod/Config::Any)
+(or via 'perldoc Config::Any') for more information.
